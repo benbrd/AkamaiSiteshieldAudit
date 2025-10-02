@@ -285,13 +285,6 @@ archive-portal      archive.example.com
 <span style="color: green;">✓ Script completed successfully</span>
 </pre>
 
-### Color Legend
-
-- <span style="color: cyan;">**Cyan**</span>: Section headers and informational messages
-- <span style="color: green;">**Green**</span>: Success messages and protected properties
-- <span style="color: yellow;">**Yellow**</span>: Warnings and statistics
-- <span style="color: red;">**Red**</span>: Errors and unprotected properties alerts
-- <span style="color: magenta;">**Magenta**</span>: Report titles and separators
 
 ## 🔍 Troubleshooting
 
@@ -323,23 +316,13 @@ Test-Path ~/.edgerc
 # You can monitor progress via the progress bars
 ```
 
-
-## 📝 Notes
-
-- **Performance**: The script uses parallel processing (4 concurrent threads) for optimal performance
-- **Rate Limiting**: Respects Akamai API rate limits automatically
-- **Large Environments**: For accounts with 100+ properties, expect few minutes execution time
-- **Staging vs Production**: Always verify you're analyzing the correct environment
-- **Data Accuracy**: Results reflect the state at execution time
-
 ## 📄 License
 
 [Apache License 2](https://choosealicense.com/licenses/apache-2.0/).
 
 ## 🔗 Related Resources
 
-- [Akamai SiteShield Documentation](https://techdocs.akamai.com/siteshield/docs)
-- [Akamai CLI Documentation](https://developer.akamai.com/cli)
+- [Akamai PowerShell Module](https://github.com/akamai/powershell)
 - [PowerShell 7+ Download](https://github.com/PowerShell/PowerShell)
 
 ---
