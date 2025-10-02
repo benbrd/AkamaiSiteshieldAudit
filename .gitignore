@@ -1,8 +1,9 @@
 *.json
 *.csv
-\#draft/*
 *.log
 *.dat
 *.result
-\#files/
-\#results/*
+drafts/
+files/
+results/*
+*.draft.*
