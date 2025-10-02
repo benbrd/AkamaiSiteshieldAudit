@@ -306,7 +306,7 @@ Test-Path ~/.edgerc
 #### Issue: "No SiteShield maps found"
 ```powershell
 # Solution: Verify API permissions
-# Ensure your API client has PAPI READ-WRITE access
+# Ensure your API client has PAPI READ-WRITE access.
 ```
 
 #### Issue: Script runs slowly
