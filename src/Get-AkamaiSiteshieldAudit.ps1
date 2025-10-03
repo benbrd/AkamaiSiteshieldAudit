@@ -316,7 +316,7 @@ try {
         
         # First, retrieve all properties that HAVE SiteShield
         try {
-            $protectedSearch = New-BulkSearch -Match "$..behaviors[?(@.name == `"siteShield`")]" `
+            $protectedSearch = New-BulkSearch -Match "$..behaviors[?(@.name ==`"siteShield`")]" `
                                              -Synchronous `
                                              -EdgeRCFile $EdgeRCFile `
                                              -Section $Section `
@@ -349,7 +349,7 @@ try {
         
         # Retrieve ALL active properties
         try {
-            $allPropertiesSearch = New-BulkSearch -Match "$..behaviors" `
+            $allPropertiesSearch = New-BulkSearch -Match "$..behaviors[?(@.name ==`"cpCode`")]" `
                                                  -Synchronous `
                                                  -EdgeRCFile $EdgeRCFile `
                                                  -Section $Section `
