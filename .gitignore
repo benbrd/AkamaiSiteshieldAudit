@@ -5,5 +5,5 @@
 *.result
 drafts/
 files/
-results/*
+export/*
 *.draft.*
