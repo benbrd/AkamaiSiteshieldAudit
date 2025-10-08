@@ -11,10 +11,10 @@
     Benjamin Brouard
 
 .VERSION
-    1.0.0
+    1.1
 
 .DATE
-    2025-01-08
+    2025-10-08
 
 .NOTES
     Purpose:
@@ -308,7 +308,7 @@ try {
     # ====================================================================
     
     # Execute this part if: ShowUnprotected mode OR Audit mode (default)
-    if ($ShowUnprotected -or $AuditMode) {
+    if (($ShowUnprotected -or $AuditMode) -and -not $SiteshieldMapDNSName) {
         Write-Host -ForegroundColor Cyan "=== Analyzing properties WITHOUT SiteShield ==="
         
         # Step 1: Identify unprotected properties (by comparing all properties with protected ones)
@@ -465,7 +465,7 @@ try {
     # ====================================================================
     
     # Determine which result to display based on mode
-    if ($AuditMode) {
+    if ($AuditMode -and -not $SiteshieldMapDNSName) {
         # AUDIT MODE (DEFAULT): Display both types of results
         Write-Host -ForegroundColor Magenta "`n╔═══════════════════════════════════════════╗"
         Write-Host -ForegroundColor Magenta "║       SITESHIELD AUDIT REPORT             ║"
@@ -567,7 +567,7 @@ try {
         $Result = $CombinedResult
         
     }
-    elseif ($ShowProtected) {
+    elseif ($ShowProtected -or $SiteshieldMapDNSName) {
         # SHOWPROTECTED MODE: Display only protected properties
         Write-Host -ForegroundColor Yellow "`n========================================="
         Write-Host -ForegroundColor Yellow "Statistics per SiteShield Map:"
@@ -640,7 +640,7 @@ try {
         # Determine mode suffix
         $modeSuffix = if ($AuditMode) {
             "Audit"
-        } elseif ($ShowProtected) {
+        } elseif ($ShowProtected -or $SiteshieldMapDNSName) {
             "Protected"
         } else {
             "Unprotected"
