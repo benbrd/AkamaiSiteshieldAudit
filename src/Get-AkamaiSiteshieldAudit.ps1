@@ -634,6 +634,19 @@ try {
     
     # Export to file if requested
     if ($OutputFile) {
+        # Create export directory if it doesn't exist
+        $exportDir = ".\export"
+        if (-not (Test-Path -Path $exportDir)) {
+            try {
+                New-Item -Path $exportDir -ItemType Directory -Force | Out-Null
+                Write-Host -ForegroundColor Cyan "Created export directory: $exportDir"
+            }
+            catch {
+                Write-ErrorLog -Message "Failed to create export directory" -Context "Directory Creation" -ErrorRecord $_
+                throw
+            }
+        }
+        
         # Generate timestamp
         $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
         
@@ -655,14 +668,9 @@ try {
         if ($OutputFile -like "*.csv") {
             # Extract base name without extension
             $baseName = [System.IO.Path]::GetFileNameWithoutExtension($OutputFile)
-            $directory = [System.IO.Path]::GetDirectoryName($OutputFile)
             
-            # Build new filename
-            if ($directory) {
-                $newOutputFile = Join-Path $directory "${baseName}_${modeSuffix}_${timestamp}.csv"
-            } else {
-                $newOutputFile = "${baseName}_${modeSuffix}_${timestamp}.csv"
-            }
+            # Build new filename in export directory
+            $newOutputFile = Join-Path $exportDir "${baseName}_${modeSuffix}_${timestamp}.csv"
             
             # CSV export - need to flatten data for Audit mode
             if ($AuditMode) {
@@ -714,7 +722,6 @@ try {
             # JSON export by default
             # Extract base name without extension
             $baseName = [System.IO.Path]::GetFileNameWithoutExtension($OutputFile)
-            $directory = [System.IO.Path]::GetDirectoryName($OutputFile)
             $extension = [System.IO.Path]::GetExtension($OutputFile)
             
             # If no extension, default to .json
@@ -722,12 +729,8 @@ try {
                 $extension = ".json"
             }
             
-            # Build new filename
-            if ($directory) {
-                $newOutputFile = Join-Path $directory "${baseName}_${modeSuffix}_${timestamp}${extension}"
-            } else {
-                $newOutputFile = "${baseName}_${modeSuffix}_${timestamp}${extension}"
-            }
+            # Build new filename in export directory
+            $newOutputFile = Join-Path $exportDir "${baseName}_${modeSuffix}_${timestamp}${extension}"
             
             # Export based on mode
             if ($AuditMode) {
